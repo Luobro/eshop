@@ -1,9 +1,9 @@
 import { stringify } from '@favware/querystring';
-import request from 'request-promise-native';
+import { default as request } from 'request-promise-native';
 import * as cheerio from 'cheerio';
 import { omit, flatten } from 'lodash';
-import { US } from './constants';
-import retry from 'async-retry';
+import { US } from '../constants';
+import { default as retry } from 'async-retry';
 
 /**
  * 获取美服商品列表。
@@ -20,7 +20,7 @@ export async function getAmericaGoods(
   page: number = 1,
   limit: number = 20,
   facetFilters: string[][] | [] = [],
-): Promise<any> {
+): Promise<{ games: any[], total: number}> {
 
   if (limit > 200) throw new Error('每页最多请求200条数据');
 
@@ -28,14 +28,14 @@ export async function getAmericaGoods(
     'lastModified',
     'objectID',
     '_highlightResult',
-    'gallery'
+    'gallery',
   ]);
 
   const {
     results: [{
       hits,
       nbHits: total,
-    }]
+    }],
   } = await request(US.GOODS_LIST_URL, {
     method: 'POST',
     qs: US.QUERY,
@@ -59,8 +59,8 @@ export async function getAmericaGoods(
   });
 
   return {
-    games: hits.map(parseHits),
     total,
+    games: hits.map(parseHits),
   };
 }
 
@@ -91,14 +91,13 @@ export async function getAmericaGoodsDetail(url: string) {
   return parseHtml(html);
 }
 
-
 /**
  * 抓取所有美服商品
  *
  * @export
  * @returns
  */
-export async function getAllAmericaGoods() {
+export async function getAllAmericaGoods(): Promise<{ games: any[], total: number}> {
   const facetFilters: string[] = US.FACET_FILTERS.PRICE;
   const getFilterGames = async (facetFilter: string) => {
     let results: any[] = [];
@@ -110,19 +109,18 @@ export async function getAllAmericaGoods() {
       currentData = await retry(async() => await getAmericaGoods(page, 200, [[facetFilter]]));
       results = results.concat(currentData.games);
       while (currentData.games.length + ((page - 1) * 200) < currentData.total) {
-        page++;
+        page = page + 1;
         await run();
       }
     };
 
     await run();
     return results;
-  }
+  };
 
   const games: any[] = flatten(await Promise.all(facetFilters.map(getFilterGames)));
   return {
     games,
-    total: games.length
-  }
+    total: games.length,
+  };
 }
-

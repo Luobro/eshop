@@ -2,7 +2,7 @@ import assert from 'assert';
 import { getJapanGoods, getJapanGoodsDetail, getAllJapanGoods } from  '../src/index';
 
 describe('jp', () => {
-  it.only('should get game list', async () => {
+  it('should get game list', async () => {
     const result = await getJapanGoods(1, 1);
     assert(result.games.length === 1);
     console.log(result.total);

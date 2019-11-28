@@ -1,10 +1,21 @@
 import { default as request } from 'request-promise-native';
 import * as cheerio from 'cheerio';
 import { omit, flatten } from 'lodash';
-import { JP } from './constants';
+import { JP } from '../constants';
 import { default as retry } from 'async-retry';
 
-export async function getJapanGoods(page: number = 1, limit: number = 20) {
+/**
+ * 获取日服商品列表，按发售时间排序。
+ *
+ * @export
+ * @param {number} [page=1]
+ * @param {number} [limit=20]
+ * @returns
+ */
+export async function getJapanGoods(
+  page: number = 1,
+  limit: number = 20,
+): Promise<{ games: any[], total: number}> {
   if (limit > 300) throw new Error('每页最多请求300条数据');
 
   const queryStringify = (obj: any) => {
@@ -49,6 +60,14 @@ export async function getJapanGoods(page: number = 1, limit: number = 20) {
   };
 }
 
+/**
+ * 获取日服商品详情，用于获取补充信息
+ *
+ * @export
+ * @param {string} nsuid
+ * @param {string} sform
+ * @returns
+ */
 export async function getJapanGoodsDetail(nsuid: string, sform: string) {
   let type: string;
   const parseHtml = (html: string) => {
@@ -100,6 +119,12 @@ export async function getJapanGoodsDetail(nsuid: string, sform: string) {
   return parseHtml(html);
 }
 
+/**
+ * 获取所有日服商品
+ *
+ * @export
+ * @returns
+ */
 export async function getAllJapanGoods() {
   const getArray = (length: number): number[] => Array(length).fill(1).map(({}, i) => i + 1);
   let { games, total } = await getJapanGoods(1, 300);
