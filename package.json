@@ -1,0 +1,37 @@
+{
+  "name": "eshop",
+  "version": "0.0.1",
+  "description": "非官方的任天堂 Switch 商店 API",
+  "main": "index.ts",
+  "author": "@_诗隐_",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@favware/querystring": "^4.1.3",
+    "async": "^3.1.0",
+    "async-retry": "^1.2.3",
+    "cheerio": "^1.0.0-rc.3",
+    "lodash": "^4.17.15",
+    "querystring": "^0.2.0",
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.8"
+  },
+  "devDependencies": {
+    "@types/async-retry": "^1.4.1",
+    "@types/cheerio": "^0.22.14",
+    "@types/lodash": "^4.14.149",
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^12.12.14",
+    "@types/request-promise-native": "^1.0.17",
+    "mocha": "^6.2.2",
+    "ts-node": "^8.5.2",
+    "tslint": "^5.19.0",
+    "tslint-config-airbnb": "^5.11.2",
+    "typescript": "^3.7.2"
+  },
+  "scripts": {
+    "test": "mocha --require ts-node/register test/*.test.ts -t 60000",
+    "lint": "tslint --project . -c tslint.json",
+    "lint-fix": "npm run lint -- --fix"
+  }
+}
