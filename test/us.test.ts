@@ -13,6 +13,5 @@ describe('us', () => {
   it('should get all games', async () => {
     const result = await getAllAmericaGoods();
     assert(result.total > 0);
-    console.log(`获得了${result.total}件商品`);
   });
 });
