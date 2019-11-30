@@ -2,7 +2,7 @@
   "name": "eshop",
   "version": "0.0.1",
   "description": "非官方的任天堂 Switch 商店 API",
-  "main": "index.ts",
+  "main": "src/index.ts",
   "author": "@_诗隐_",
   "license": "MIT",
   "private": true,

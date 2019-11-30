@@ -20,3 +20,9 @@ async function run() {
   console.log(res);
 }
 ```
+
+## 未决问题
+
+* [ ] 美服、欧服 DLC 商品
+* [ ] 统一商品数据返回格式
+* [ ] 港、台、韩服的抓取
