@@ -24,7 +24,7 @@ export async function getAmericaGoods(
 
   if (limit > 200) throw new Error('每页最多请求200条数据');
 
-  const parseHits = (hits: any) => omit(hits, [
+  const parseHit = (hit: any) => omit(hit, [
     'lastModified',
     'objectID',
     '_highlightResult',
@@ -60,7 +60,7 @@ export async function getAmericaGoods(
 
   return {
     total,
-    games: hits.map(parseHits),
+    games: hits.map(parseHit),
   };
 }
 

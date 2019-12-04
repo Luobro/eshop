@@ -10,7 +10,7 @@ describe('jp', () => {
     const result = await getJapanGoodsDetail('70010000013977', 'HAC_DOWNLOADABLE');
     assert(result.title);
   });
-  it('should get all games', async () => {
+  it.skip('should get all games', async () => {
     const result = await getAllJapanGoods();
     assert(result.games.length > 1);
   });

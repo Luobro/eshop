@@ -10,7 +10,7 @@ describe('us', () => {
     const result = await getAmericaGoodsDetail('/games/detail/resident-evil-5-switch');
     assert(result.title);
   });
-  it('should get all games', async () => {
+  it.skip('should get all games', async () => {
     const result = await getAllAmericaGoods();
     assert(result.total > 0);
   });
