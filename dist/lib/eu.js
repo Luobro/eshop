@@ -25,7 +25,7 @@ async function getEuropeGoods(page = 1, limit = 20) {
     if (start < 0)
         throw new Error('page and limit must be greater than 0');
     const { response: { numFound: total, docs } } = await request_promise_native_1.default(constants_1.EU.GOODS_LIST_URL, {
-        qs: Object.assign({ start: page, rows: limit }, constants_1.EU.GOODS_LIST_OPTIONS),
+        qs: Object.assign({ start, rows: limit }, constants_1.EU.GOODS_LIST_OPTIONS),
         json: true,
     });
     return {
