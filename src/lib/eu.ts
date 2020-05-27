@@ -30,7 +30,7 @@ export async function getEuropeGoods(
 
   const { response: { numFound: total, docs } } = await request(EU.GOODS_LIST_URL, {
     qs: {
-      start: page,
+      start,
       rows: limit,
       ...EU.GOODS_LIST_OPTIONS,
     },
