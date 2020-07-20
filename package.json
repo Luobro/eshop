@@ -15,7 +15,7 @@
     "async": "^3.1.0",
     "async-retry": "^1.2.3",
     "cheerio": "^1.0.0-rc.3",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "querystring": "^0.2.0",
     "request": "^2.88.0",
     "request-promise-native": "^1.0.8"
